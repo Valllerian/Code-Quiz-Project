@@ -56,5 +56,15 @@ p {
 }
 
 #start-button {
-    
+
+}
+
+#section {
+
+}
+
+footer{
+    display: none;
+    background-color: dimgray;
+    text-align: center; 
 }
