@@ -62,8 +62,16 @@ p {
 }
 
 #questionSection{
-    display: none;
-    margin-bottom:70vh ;
+    margin-top: 10vh;
+    margin-bottom:35vh ;
+    list-style: none;
+}
+
+#answer {
+    list-style-type: none;
+}
+#answer li {
+    margin:1vh;
 }
 
 footer{

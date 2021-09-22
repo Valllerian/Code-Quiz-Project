@@ -8,7 +8,9 @@ var questionEl = document.querySelector("#questionText");
 var answerEl = document.querySelector("#answer");
 var prompt = document.querySelector("#prompt");
 
+
 // setting a variable with questions and answers
+var currentQuestion = 0
 var questions = [
     firstQuestion = {
         question : "What is JavaScript?",
@@ -44,6 +46,7 @@ var questions = [
 // Global var to keep track of score
 var score = 0;
 
+
 // Global var for timer seconds
 var timer = 90;
 
@@ -73,9 +76,20 @@ function startTimer() {
     }, 1000);
   }
 
+//   Uses the array of questions and displays each question with answers (answers are buttons)
 function showQuestion(){
-    questionSection.setAttribute("style", "display:block;");
+    questionEl.textContent = questions[currentQuestion].question;
+    for(i = 0; i < questions[currentQuestion].answer.length; i++){
+        var li = document.createElement("li")
+        li.innerHTML = "<button>" + questions[currentQuestion].answer[i] +"</button>";
+        li.dataIndex = i;
+        
+        answerEl.append(li);
 }
+}
+// Make right\wrong
+// Make count
+// Make Promt
 
 //   Hides main text after start button is clicked and starts displaying questions and footer
 function display(){
