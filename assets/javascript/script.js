@@ -7,14 +7,19 @@ var questionSection = document.querySelector("#questionSection");
 var questionEl = document.querySelector("#questionText");
 var answerEl = document.querySelector("#answer");
 var promptEl = document.querySelector("#prompt");
-var form = document.querySelector("#form");
+var listScore = document.querySelector("#list-score");
+var lastScore = document.querySelector("#last-score");
+var sectionBoard = document.querySelector("#ScoreBoard");
+
+var showScores = document.querySelector("#showScores");
+var hideScores = document.querySelector("#hideScores");
+
+var student = JSON.parse(localStorage.getItem('scoreValue'));
 var submit = document.querySelector("#submitButton");
 var scoreValue = [];
-// var scoreName = document.querySelector("#username");
+
 var username = "";
 var highScores = [];
-
-
 
 
 
@@ -23,6 +28,14 @@ var timer = 90;
 
 // setting a variable with questions and answers
 var currentQuestion = 0
+
+init ();
+function init (){
+    if (student.studentName === null){
+        student.studentName = "Last student";
+    }
+    lastScore.textContent = student.studentName + " scored " + student.score + " points";
+}
 
 // setting an array with Quiz questions\answers
 const questions = [
@@ -126,48 +139,35 @@ function removeChildren(parent){
 function results(){
     if (timer >= 2){
     questionSection.textContent = "You passed! Your Score: " + timer + " points.";
-    
+    username = prompt("Enter your name!");
+    alert("Thank you, your score is saved!");
+    var scoreValue = {
+        studentName: username,
+        score: timer,
+      };
     }
     if ( timer == 1) {
     questionSection.textContent = "You passed! Your Score: " + timer + " point.";
+    username = prompt("Enter your name!");
+    alert("Thank you, your score is saved!");
     var scoreValue = {
-        name: username,
+        studentName: username,
         score: timer,
       };
     // localStorage.setItem("scoreValue", JSON.stringify(scoreValue));
+    
     } 
     if (timer == 0 ){
     questionSection.textContent = "You failed! Your Score: " + timer + " points.";
     }
-    username = prompt("Enter your username!");
-    alert("Thank you, your score is saved!");
-    var scoreValue = {
-        name: username,
-        score: timer,
-      };
+    
+    
     localStorage.setItem("scoreValue", JSON.stringify(scoreValue));
     timerElement.setAttribute("style", "display:none;");
-    form.setAttribute("style", "display:block;");
-
+    sectionBoard.setAttribute("style", "display:block;");
+    lastScore.textContent = student.studentName + " scored " + student.score + " points";
+};
     
-}
-
-// submit.addEventListener("click", function (event){
-//     event.preventDefault;
-//     saveScore();
-// });
-    
-
-// submit.addEventListener("click", saveScore);
-  
-
-// function saveScore() { 
-//     var scoreValue = {
-//       name: username.value,
-//       score: score,
-//     };
-//     localStorage.setItem("scoreValue", JSON.stringify(scoreValue));
-//   }
 
 // Main function that triggers displaying questions\hiding greeting text and starts timer
 function main() {
@@ -178,7 +178,20 @@ function main() {
     showQuestion();
     
 }
+function showScore() {
+    sectionBoard.setAttribute("style", "display:block;");
+    hideScores.setAttribute("style", "display:block;");
+}
 
+showScores.addEventListener("click",showScore);
+
+function hideScore() {
+    
+    sectionBoard.setAttribute("style", "display:none;");
+    hideScores.setAttribute("style", "display:none;");
+}
+
+hideScores.addEventListener("click",hideScore);
 
 //   Hides main text after start button is clicked and starts displaying questions and footer
 function display(){
@@ -186,8 +199,13 @@ function display(){
     footer.setAttribute("style", "display:block;");
   }
 
+// function printScore() {
+// var userLast = localStorage.getItem(score);
+// lastScore.textContent = "Your last score is:" + userLasr + " points.";
+// }
 
 // event listener to call the function for answer check
 answerEl.addEventListener("click",answersButtons);
 // event listener to start button to call  function on click
 startButton.addEventListener("click", main);
+
