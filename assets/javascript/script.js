@@ -3,6 +3,10 @@ var startButton = document.querySelector
 ("#start-button");
 var section = document.querySelector("#section");
 var footer = document.querySelector("footer");
+var questionSection = document.querySelector("#questionSection");
+var questionEl = document.querySelector("#questionText");
+var answerEl = document.querySelector("#answer");
+var prompt = document.querySelector("#prompt");
 
 // setting a variable with questions and answers
 var questions = [
@@ -47,6 +51,7 @@ var timer = 90;
 function main() {
     display();
     startTimer();
+    showQuestion();
     
 }
 
@@ -67,6 +72,10 @@ function startTimer() {
     //   }
     }, 1000);
   }
+
+function showQuestion(){
+    questionSection.setAttribute("style", "display:block;");
+}
 
 //   Hides main text after start button is clicked and starts displaying questions and footer
 function display(){

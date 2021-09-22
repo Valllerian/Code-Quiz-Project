@@ -56,11 +56,14 @@ p {
 }
 
 #start-button {
-
 }
 
 #section {
+}
 
+#questionSection{
+    display: none;
+    margin-bottom:70vh ;
 }
 
 footer{
