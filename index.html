@@ -19,7 +19,7 @@
       </nav>
     <section id="section">
         <h1>Welcome to JavaScript coding quiz!</h1>
-        <p>Let`s see how good you are with JavaScript! Press start button to begin. Keep in mind, that wvery incorrect answer will reduce your time by 5 seconds!
+        <p>Let`s see how good you are with JavaScript! Press start button to begin. Keep in mind, that wvery incorrect answer will reduce your time by 30 seconds!
         </p>
         <button id="start-button">Start</button>
     </section>
@@ -30,7 +30,14 @@
         <ul id="answer"></ul>
         <!-- shows Correct\Wrong depending on the answer -->
         <p id="prompt"></p>
+        
     </section>
+
+    <form id="form" action="assets/javascript/script.js">
+        <label for="name">Your name: </label>
+        <input type="text" id="username" name="form" />
+        <button id="highButton">Submit</button>
+    </form>
 
     <footer>
         <a href="index.html" class="goBackBttn">Go Back</a>

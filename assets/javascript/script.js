@@ -7,6 +7,9 @@ var questionSection = document.querySelector("#questionSection");
 var questionEl = document.querySelector("#questionText");
 var answerEl = document.querySelector("#answer");
 var promptEl = document.querySelector("#prompt");
+var form = document.querySelector("#form");
+var username = document.querySelector("#username");
+var submit = document.querySelector("#submitButton");
 
 // Global var to keep track of score
 var score = 0;
@@ -17,7 +20,7 @@ var timer = 90;
 // setting a variable with questions and answers
 var currentQuestion = 0
 
-
+// setting an array with Quiz questions\answers
 const questions = [
     firstQuestion = {
         question : "1)What is JavaScript?",
@@ -50,16 +53,38 @@ const questions = [
     },
 ]
 
+// Timer function
+function startTimer() {
+    var timerCount = setInterval(function () {
+        timer--;
+      timerElement.textContent = timer;
+      if (timer === 0 || timer <= 0) {
+        clearInterval(timerCount);
+        results();
+      }
+    }, 1000);
+  }
+
+  //   Uses the array of questions and displays each question with answers (answers are buttons)
+function showQuestion(){
+    questionEl.textContent = questions[currentQuestion].question;
+    for(i = 0; i < questions[currentQuestion].answer.length; i++){
+        var li = document.createElement("li");
+        li.innerHTML = "<button>" + questions[currentQuestion].answer[i] +"</button>";
+        li.dataIndex = i;
+        answerEl.append(li);   
+}
+}
+
+
 function answersButtons(e){
     if(e.target.matches("button")){
         e.preventDefault(); 
-        //everytime a button is clicked check if they reached the end of questions
+        //checking if the user has answered all the questions
         if (currentQuestion === questions.length-1){
             results();
         }
-        //console.log(e.target.parentElement.dataIndex);
-        var index = parseInt(e.target.parentElement.dataIndex)
-        // console.log(index);
+        var index = parseInt(e.target.parentElement.dataIndex);
         checkAnswer(index);
         removeChildren(answerEl);
         currentQuestion++;
@@ -67,19 +92,7 @@ function answersButtons(e){
     }
 }
 
-function results(){
-    questionSection.textContent = "Your Score: " + timer;
-    timerElement.setAttribute("style", "display:none;");
-
-}
-
-function removeChildren(parent){
-    while(parent.firstChild){
-        parent.removeChild(parent.firstChild);
-    }
-}
-
-
+// function checks if users answer is correct 
 function checkAnswer(index){
     if(index === questions[currentQuestion].correctAnswer){
         promptEl.style.opacity = 1;
@@ -90,12 +103,36 @@ function checkAnswer(index){
         promptEl.style.opacity = 1;
         promptEl.textContent = "Wrong!";
         timer = timer - 30;
-        //console.log(totalSeconds);
+        
     }
 window.setTimeout("promptEl.style.opacity = 0;", 1000);
 }
 
+// removes answer buttons before showing the new list
+function removeChildren(parent){
+    while(parent.firstChild){
+        parent.removeChild(parent.firstChild);
+    }
+}
 
+//shows users score on the page
+function results(){
+    questionSection.textContent = "Your Score: " + timer;
+    timerElement.setAttribute("style", "display:none;");
+    form.setAttribute("style", "display:block;");
+    
+}
+
+submit.addEventListener("click", saveScore);
+  
+
+function saveScore() {
+    var scoreValue = {
+      name: username.value,
+      score: score,
+    };
+    localStorage.setItem("scoreValue", JSON.stringify(scoreValue));
+  }
 
 // Main function that triggers displaying questions\hiding greeting text and starts timer
 function main() {
@@ -105,39 +142,13 @@ function main() {
     
 }
 
-// Timer function
-function startTimer() {
-    var timerCount = setInterval(function () {
-        timer--;
-      timerElement.textContent = timer;
-  
-      if (timer === 0 || timer <= 0) {
-        clearInterval(timerCount);
-        results();
-      }
-    }, 1000);
-  }
-
-//   Uses the array of questions and displays each question with answers (answers are buttons)
-function showQuestion(){
-    questionEl.textContent = questions[currentQuestion].question;
-    for(i = 0; i < questions[currentQuestion].answer.length; i++){
-        var li = document.createElement("li")
-        li.innerHTML = "<button>" + questions[currentQuestion].answer[i] +"</button>";
-        li.dataIndex = i;
-        answerEl.append(li);
-        
-}
-}
-
-
-
 //   Hides main text after start button is clicked and starts displaying questions and footer
 function display(){
     section.setAttribute("style", "display:none;");
     footer.setAttribute("style", "display:block;");
   }
 
+// event listener to call the function for answer check
 answerEl.addEventListener("click",answersButtons);
-  // event listener to start button to call  function on click
+// event listener to start button to call  function on click
 startButton.addEventListener("click", main);

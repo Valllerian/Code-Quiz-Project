@@ -79,3 +79,13 @@ footer{
     background-color: dimgray;
     text-align: center; 
 }
+
+#form {
+    display: none;
+    text-align: center; 
+    margin-bottom: 5vh;
+}
+
+#submitButton {
+    
+}
