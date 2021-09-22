@@ -1,0 +1,55 @@
+body {
+    background-color: lightcyan;
+}
+
+nav {
+    background-color: dimgray;
+    color: whitesmoke;
+    text-align: center;
+    font-size: 25px;
+}
+
+nav a {
+    color: whitesmoke;
+    padding: 3vh;
+    line-height:60px;
+    
+}
+
+#timer {
+    padding-bottom: 2vh;
+}
+
+a:hover{
+    color: black;
+    font-size: 35px;
+    transition: 375ms ease-in-out;
+}
+
+
+h1 {
+    text-align: center;
+    padding-top: 15vh;
+}
+
+section {
+    text-align: center;
+}
+
+p {
+    padding-top: 5vh;
+}
+
+.highscoreBttn
+{
+    text-align: center; 
+    padding-top: 5vh;  
+}
+
+.goBackBttn
+{
+    color: black;
+    padding: 3vh;
+    line-height:60px;
+    margin-right: 5vh;
+}
