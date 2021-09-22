@@ -6,49 +6,97 @@ var footer = document.querySelector("footer");
 var questionSection = document.querySelector("#questionSection");
 var questionEl = document.querySelector("#questionText");
 var answerEl = document.querySelector("#answer");
-var prompt = document.querySelector("#prompt");
+var promptEl = document.querySelector("#prompt");
 
+// Global var to keep track of score
+var score = 0;
+
+// Global var for timer seconds
+var timer = 90;
 
 // setting a variable with questions and answers
 var currentQuestion = 0
-var questions = [
+
+
+const questions = [
     firstQuestion = {
-        question : "What is JavaScript?",
+        question : "1)What is JavaScript?",
         answer : [ "A currency;", "A browser;", "A football team;","A scripting language." ],
         correctAnswer : 3
     },
 
     secondQuestion = {
-        question : "What are three ways to declare a variable in JavaScript?",
+        question : "2)What are three ways to declare a variable in JavaScript?",
         answer : [ "var, let , const;", " if, else, for;", "var, iab, le;","var(), var {}, var <>." ],
         correctAnswer : 0
     },
 
     thirdQuestion = {
-        question : "A JavaScript string is normally written inside what symbols?",
+        question : "3)A JavaScript string is normally written inside what symbols?",
         answer : [ "Quotes;", "Brackets;", "Parenthesis;","Dots." ],
         correctAnswer : 0
     },
 
     fourthQuestion = {
-        question : "Can you store multiple values in JavaScript arrays?",
+        question : "4)Can you store multiple values in JavaScript arrays?",
         answer : [ "Yes;", "No."],
         correctAnswer : 0
     },
 
     fifthQuestion = {
-        question : "What is not a condition statement in JavaScript?",
+        question : "5)What is not a condition statement in JavaScript?",
         answer : [ "If;", "Who;", "Else;","Else if;"],
         correctAnswer : 1
     },
 ]
 
-// Global var to keep track of score
-var score = 0;
+function answersButtons(e){
+    if(e.target.matches("button")){
+        e.preventDefault(); 
+        //everytime a button is clicked check if they reached the end of questions
+        if (currentQuestion === questions.length-1){
+            results();
+        }
+        //console.log(e.target.parentElement.dataIndex);
+        var index = parseInt(e.target.parentElement.dataIndex)
+        // console.log(index);
+        checkAnswer(index);
+        removeChildren(answerEl);
+        currentQuestion++;
+        showQuestion();        
+    }
+}
+
+function results(){
+    questionSection.textContent = "Your Score: " + timer;
+    timerElement.setAttribute("style", "display:none;");
+    // questionSection.style.display = "none";
+    // scoreInfo.style.display = "block";
+}
+
+function removeChildren(parent){
+    while(parent.firstChild){
+        parent.removeChild(parent.firstChild);
+    }
+}
 
 
-// Global var for timer seconds
-var timer = 90;
+function checkAnswer(index){
+    if(index === questions[currentQuestion].correctAnswer){
+        promptEl.style.opacity = 1;
+        promptEl.textContent = "Corret!";
+        score++; 
+    }
+    else{
+        promptEl.style.opacity = 1;
+        promptEl.textContent = "Wrong!";
+        timer = timer - 16;
+        //console.log(totalSeconds);
+    }
+window.setTimeout("promptEl.style.opacity = 0;", 1000);
+}
+
+
 
 // Main function that triggers displaying questions\hiding greeting text and starts timer
 function main() {
@@ -66,13 +114,8 @@ function startTimer() {
   
       if (timer === 0) {
         clearInterval(timerCount);
-        // display score
+        results();
       }
-      
-    //   if (all the questions answered) {
-    //     clearInterval(timerCount);
-    //     // display score
-    //   }
     }, 1000);
   }
 
@@ -83,13 +126,12 @@ function showQuestion(){
         var li = document.createElement("li")
         li.innerHTML = "<button>" + questions[currentQuestion].answer[i] +"</button>";
         li.dataIndex = i;
-        
         answerEl.append(li);
+        
 }
 }
-// Make right\wrong
-// Make count
-// Make Promt
+
+
 
 //   Hides main text after start button is clicked and starts displaying questions and footer
 function display(){
@@ -98,5 +140,13 @@ function display(){
   }
 
 
+  function finalScore() {
+    // document.getElementById("finalScore").setAttribute("style", "display:block;");
+    // endScoreEl.textContent = "You're final score is " + score;
+    // testDis.setAttribute("style", "display:none;");
+    // create previous score tracker
+  }
+
+answerEl.addEventListener("click",answersButtons);
   // event listener to start button to call  function on click
 startButton.addEventListener("click", main);
