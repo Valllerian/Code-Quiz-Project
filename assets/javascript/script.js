@@ -70,8 +70,7 @@ function answersButtons(e){
 function results(){
     questionSection.textContent = "Your Score: " + timer;
     timerElement.setAttribute("style", "display:none;");
-    // questionSection.style.display = "none";
-    // scoreInfo.style.display = "block";
+
 }
 
 function removeChildren(parent){
@@ -90,7 +89,7 @@ function checkAnswer(index){
     else{
         promptEl.style.opacity = 1;
         promptEl.textContent = "Wrong!";
-        timer = timer - 16;
+        timer = timer - 30;
         //console.log(totalSeconds);
     }
 window.setTimeout("promptEl.style.opacity = 0;", 1000);
@@ -112,7 +111,7 @@ function startTimer() {
         timer--;
       timerElement.textContent = timer;
   
-      if (timer === 0) {
+      if (timer === 0 || timer <= 0) {
         clearInterval(timerCount);
         results();
       }
@@ -137,14 +136,6 @@ function showQuestion(){
 function display(){
     section.setAttribute("style", "display:none;");
     footer.setAttribute("style", "display:block;");
-  }
-
-
-  function finalScore() {
-    // document.getElementById("finalScore").setAttribute("style", "display:block;");
-    // endScoreEl.textContent = "You're final score is " + score;
-    // testDis.setAttribute("style", "display:none;");
-    // create previous score tracker
   }
 
 answerEl.addEventListener("click",answersButtons);
