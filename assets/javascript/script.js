@@ -31,10 +31,27 @@ var currentQuestion = 0
 
 init ();
 function init (){
-    if (student.studentName === null){
-        student.studentName = "Last student";
-    }
+    if (student === null){
+            student = [
+            studentName = "Last student",
+            score = "0"
+        ]
+        lastScore.textContent = "No scores to show";
+        localStorage.clear();
+    } if (student.studentName === null){
+        student = [
+        studentName = "Last student",
+     ]
     lastScore.textContent = student.studentName + " scored " + student.score + " points";
+    localStorage.clear();
+    }   
+     if(student !== null)  {
+        lastScore.textContent = student.studentName + " scored " + student.score + " points";
+    }
+    // if (student.studentName === null){
+    //      student.studentName = "Last student";
+    // }
+    
 }
 
 // setting an array with Quiz questions\answers
@@ -159,6 +176,12 @@ function results(){
     } 
     if (timer == 0 ){
     questionSection.textContent = "You failed! Your Score: " + timer + " points.";
+    username = prompt("Enter your name!");
+    alert("Thank you, your score is saved!");
+    var scoreValue = {
+        studentName: username,
+        score: timer,
+      };
     }
     
     
@@ -208,4 +231,3 @@ function display(){
 answerEl.addEventListener("click",answersButtons);
 // event listener to start button to call  function on click
 startButton.addEventListener("click", main);
-
