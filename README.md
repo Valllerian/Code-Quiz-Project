@@ -28,7 +28,7 @@ Main page includes the clickable button to start the game:
 After clicking Start button we are prompted with 5 questions:
 
 <br>
-<img alt="length selection prompt" src="assets/images/image2.jpg" />
+<img alt="Question and variants" src="assets/images/image2.jpg" />
 <br>
 
 
@@ -36,20 +36,20 @@ Answering the question with the wrong answer button will decrease the timer by 3
 the answer was wrong. If answer is correct - next question would be displayed and "Correct" prompt would appear.
 
 <br>
-<img alt="invalid length alert" src="assets/images/image3.jpg" />
+<img alt="timer decreasing and promts" src="assets/images/image3.jpg" />
 <br>
 
 After answering all questions or after timer runs out user would be asked for the name to save their score.
 
 <br>
-<img alt="types of characters selection" src="assets/images/image4.jpg" />
+<img alt="entering name upon completeion" src="assets/images/image4.jpg" />
 <br>
 
 Back on the main page user can click on show score button to show their last score.
 
 
 <br>
-<img alt="an alert for canceling all the character type prompts" src="assets/images/image5.jpg" />
+<img alt="last score button workability" src="assets/images/image5.jpg" />
 <br>
 
 

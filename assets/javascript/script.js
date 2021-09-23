@@ -1,3 +1,4 @@
+// setting variables to connect to html file
 var timerElement = document.querySelector("#timer");
 var startButton = document.querySelector
 ("#start-button");
@@ -113,6 +114,7 @@ function showQuestion(){
 }
 
 
+// 
 function answersButtons(e){
     if(e.target.matches("button")){
         e.preventDefault(); 
@@ -142,6 +144,7 @@ function checkAnswer(index){
         timer = timer - 30;
         
     }
+    // showing wrong\right prompt for 1 second instead of constant
 window.setTimeout("promptEl.style.opacity = 0;", 1000);
 }
 
@@ -152,7 +155,7 @@ function removeChildren(parent){
     }
 }
 
-//shows users score on the page
+//shows users score on the page depending on the score (timer)
 function results(){
     if (timer >= 2){
     questionSection.textContent = "You passed! Your Score: " + timer + " points.";
@@ -206,6 +209,7 @@ function showScore() {
     hideScores.setAttribute("style", "display:block;");
 }
 
+// event listener for a show score button
 showScores.addEventListener("click",showScore);
 
 function hideScore() {
@@ -214,6 +218,7 @@ function hideScore() {
     hideScores.setAttribute("style", "display:none;");
 }
 
+// event listener for a hide button
 hideScores.addEventListener("click",hideScore);
 
 //   Hides main text after start button is clicked and starts displaying questions and footer
@@ -222,10 +227,6 @@ function display(){
     footer.setAttribute("style", "display:block;");
   }
 
-// function printScore() {
-// var userLast = localStorage.getItem(score);
-// lastScore.textContent = "Your last score is:" + userLasr + " points.";
-// }
 
 // event listener to call the function for answer check
 answerEl.addEventListener("click",answersButtons);
